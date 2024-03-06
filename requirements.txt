@@ -1,9 +1,7 @@
-uvicorn==0.21.1
-fastapi==0.95.1
-python-dotenv==1.0.0
-loguru==0.7.0
-aiohttp==3.8.4
-sqlalchemy==2.0.10
+uvicorn==0.27.1
+fastapi==0.110.0
+loguru==0.7.2
+sqlalchemy==2.0.28
 sqlalchemy-stubs==0.4
 
 pytest==7.3.1

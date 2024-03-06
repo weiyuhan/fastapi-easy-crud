@@ -1,10 +1,10 @@
 import os
 from typing import Optional
 
-from pydantic import BaseSettings
+from pydantic import BaseModel
 
 
-class Settings(BaseSettings):
+class Settings(BaseModel):
     sqlalchemy_engine: Optional[str]
     sqlalchemy_engine_password: Optional[str]
 
@@ -21,4 +21,3 @@ def init(
     settings.sqlalchemy_engine_password = sqlalchemy_engine_password or os.getenv(
         "SQLALCHEMY_ENGINE_PASSWORD"
     )
-    # settings = Settings(sqlalchemy_engine=sqlalchemy_engine, sqlalchemy_engine_password=sqlalchemy_engine_password)
