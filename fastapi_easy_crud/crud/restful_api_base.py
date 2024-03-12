@@ -34,10 +34,10 @@ class BaseAPI(
         self.create_schema_type = create_schema_type
         self.update_schema_type = update_schema_type
 
-    def to_model(self, db_model: Any) -> GetSchemaType:
-        return self.get_schema_type.model_validate(db_model)
+    def to_model(self, db_model: Any) -> Optional[GetSchemaType]:
+        return self.get_schema_type.model_validate(db_model) if db_model else None
 
-    def to_models(self, db_models: List[Any]) -> List[GetSchemaType]:
+    def to_models(self, db_models: List[Any]) -> List[Optional[GetSchemaType]]:
         return [self.to_model(m) for m in db_models]
 
     def init_router(self, router: APIRouter) -> None:
