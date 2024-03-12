@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastapi-easy-crud"
-version = "0.0.3"
+version = "0.0.6"
 authors = [
   { name="Yuhan Wei", email="weiyuhan@pku.edu.cn" },
 ]
@@ -21,7 +21,10 @@ dependencies = [
     'fastapi>=0.95.1',
     'loguru>=0.7.0',
     'sqlalchemy>=2.0.10',
-    'sqlalchemy-stubs>=0.4'
+    'sqlalchemy[asyncio]>=2.0.10',
+    'aiomysql>=0.2.0',
+    'pymysql>=1.0.3',
+    'asyncpg>=0.29.0'
 ]
 
 [project.optional-dependencies]
