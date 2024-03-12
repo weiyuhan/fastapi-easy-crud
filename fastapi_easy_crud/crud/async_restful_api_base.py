@@ -1,5 +1,5 @@
-from typing import (Annotated, Any, Generic, List, Optional, Type, TypeVar,
-                    Union)
+from typing import (Annotated, Any, Dict, Generic, List, Optional, Type,
+                    TypeVar, Union)
 
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
@@ -90,7 +90,7 @@ class AsyncBaseAPI(
         @router.put("/update", response_model=Optional[get_schema_type])  # type: ignore
         async def update(
             origin_obj: get_schema_type,  # type: ignore
-            update_obj: update_schema_type,  # type: ignore
+            update_obj: Union[update_schema_type, Dict[str, Any]],  # type: ignore
             db: AsyncSession = Depends(deps.get_async_db),
         ) -> Any:
             db_row = await crud_instance.update(
@@ -101,7 +101,7 @@ class AsyncBaseAPI(
         @router.put("/update_by_id", response_model=Optional[get_schema_type])
         async def update_by_id(
             id: Any,
-            update_obj: update_schema_type,  # type: ignore
+            update_obj: Union[update_schema_type, Dict[str, Any]],  # type: ignore
             db: AsyncSession = Depends(deps.get_async_db),
         ) -> Any:
             db_row = await crud_instance.update_by_id(db=db, id=id, obj_in=update_obj)

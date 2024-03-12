@@ -3,7 +3,7 @@ from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from loguru import logger
 from pydantic import BaseModel
-from sqlalchemy import insert, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi_easy_crud.db.db_base import CommonBase as Base
@@ -50,19 +50,14 @@ class AsyncCRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     async def batch_create(
         self, db: AsyncSession, *, objs: List[CreateSchemaType]
     ) -> List[ModelType]:
-        data_inputs = [jsonable_encoder(obj_in, exclude_unset=True) for obj_in in objs]
-        models = [self.model(**data_input) for data_input in data_inputs]
-        db.add_all(models)
-        await db.commit()
-        db.expire_all()
-        return models
+        raise NotImplementedError
 
     async def batch_create_silently(
         self, db: AsyncSession, *, objs: List[CreateSchemaType]
     ) -> None:
         data_inputs = [jsonable_encoder(obj_in, exclude_unset=True) for obj_in in objs]
-        stmt = insert(self.model).values(data_inputs)
-        await db.execute(stmt)
+        models = [self.model(**data_input) for data_input in data_inputs]
+        db.add_all(models)
         await db.commit()
 
     async def update(
