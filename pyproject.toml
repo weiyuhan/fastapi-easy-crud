@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastapi-easy-crud"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
   { name="Yuhan Wei", email="weiyuhan@pku.edu.cn" },
 ]
@@ -41,3 +41,6 @@ tests = [
 [project.urls]
 Homepage = "https://github.com/weiyuhan/fastapi-easy-crud"
 Issues = "https://github.com/weiyuhan/fastapi-easy-crud/issues"
+
+[tool.setuptools]
+py-modules = ['fastapi_easy_crud']
